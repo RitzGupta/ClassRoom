@@ -1,3 +1,4 @@
+//---------------Google-----------------//
 package com.example.android.pathasalaa;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -5,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -17,12 +19,13 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public  class LogninActivity extends AppCompatActivity {
+public  class LogninActivity extends AppCompatActivity implements View.OnClickListener{
 
     private static final String TAG = "MainActivity";
     private SignInButton mGoogleBtn;
@@ -37,10 +40,14 @@ public  class LogninActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lognin);
 
+        //........................................Google Authentication...........................//
+
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null){
+                    finish();
                     startActivity(new Intent(LogninActivity.this,Homepage.class));
                 }
             }
@@ -49,6 +56,7 @@ public  class LogninActivity extends AppCompatActivity {
 
         // ...
         // Initialize Firebase Auth
+        FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -66,12 +74,31 @@ public  class LogninActivity extends AppCompatActivity {
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        mGoogleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        findViewById(R.id.google_btn).setOnClickListener(this);
+        findViewById(R.id.textViewSignup).setOnClickListener(this);
+        findViewById(R.id.btn_manual_login).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch(view.getId()){
+
+            case R.id.google_btn:
                 signIn();
-            }
-        });
+                break;
+
+            case R.id.textViewSignup:
+                finish();
+                startActivity(new Intent(this, SignupActivity.class));
+                break;
+
+            case R.id.btn_manual_login:
+                startActivity(new Intent(this,ManualSigninActivity.class));
+                break;
+
+        }
+
     }
 
     @Override
@@ -79,6 +106,8 @@ public  class LogninActivity extends AppCompatActivity {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
+
+
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -127,4 +156,5 @@ public  class LogninActivity extends AppCompatActivity {
                 });
 
     }
+
 }
