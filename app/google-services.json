@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "143288689061",
+    "firebase_url": "https://pathasalaa.firebaseio.com",
+    "project_id": "pathasalaa",
+    "storage_bucket": "pathasalaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143288689061:android:b911d7bd2d0b0baf",
+        "android_client_info": {
+          "package_name": "com.example.android.pathasalaa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143288689061-c151bji09m70jei6bl4ru7ds57amkna2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.pathasalaa",
+            "certificate_hash": "bcbe73e375e7709bddce2aa04fde75a0bcca146f"
+          }
+        },
+        {
+          "client_id": "143288689061-tuu6rff3na8kon6h6rpsnpg2ladbr0fd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9HXHGtOeoCqi_ZE6aSFvEFE8mSlVODLE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143288689061-tuu6rff3na8kon6h6rpsnpg2ladbr0fd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
