@@ -40,6 +40,11 @@ public  class LogninActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lognin);
 
+        // Initialize Firebase Auth
+        FirebaseApp.initializeApp(this);
+        mAuth = FirebaseAuth.getInstance();
+
+
         //........................................Google Authentication...........................//
 
 
@@ -48,16 +53,13 @@ public  class LogninActivity extends AppCompatActivity implements View.OnClickLi
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser()!=null){
                     finish();
-                    startActivity(new Intent(LogninActivity.this,Homepage.class));
+                    startActivity(new Intent(LogninActivity.this,ProfileActivity.class));
                 }
             }
         };
         mGoogleBtn = (SignInButton) findViewById(R.id.google_btn);
 
-        // ...
-        // Initialize Firebase Auth
-        FirebaseApp.initializeApp(this);
-        mAuth = FirebaseAuth.getInstance();
+
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))

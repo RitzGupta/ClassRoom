@@ -47,9 +47,10 @@ public class ManualSigninActivity extends AppCompatActivity implements View.OnCl
 
         if (mAuth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent(this, Homepage.class));
+            startActivity(new Intent(this, ProfileActivity.class));
         }
     }
+
 
     @Override
     public void onClick(View v) {
@@ -100,7 +101,7 @@ public class ManualSigninActivity extends AppCompatActivity implements View.OnCl
 
                 if (task.isSuccessful()) {
                     finish();
-                    Intent intent = new Intent(ManualSigninActivity.this, Homepage.class);
+                    Intent intent = new Intent(ManualSigninActivity.this, ProfileActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 } else {
