@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -32,6 +33,7 @@ import java.io.IOException;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    TextView textView;
     ImageView imageView;
     EditText editText;
     private static final int CHOOSE_IMAGE = 101;
@@ -51,8 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         editText = (EditText) findViewById(R.id.editTextDisplayName);
         imageView = (ImageView) findViewById(R.id.imageView);
-
-
+        textView = (TextView)findViewById(R.id.textViewVerified);
         progressBar = findViewById(R.id.progressBar);
 
 
@@ -94,7 +95,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void loadUserInformation() {
 
-        FirebaseUser user = mAuth.getCurrentUser();
+        final FirebaseUser user = mAuth.getCurrentUser();
 
         if(user != null) {
             if(user.getPhotoUrl() !=null  ){
@@ -107,6 +108,23 @@ public class ProfileActivity extends AppCompatActivity {
             }
             if(user.getDisplayName()!=null){
                 editText.setText(user.getDisplayName());
+            }
+            if(user.isEmailVerified()){
+                textView.setText("Email Verified");
+            }else{
+                textView.setText("Email not Verified (click to varify)");
+
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(ProfileActivity.this,"Verification Email Sent ",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
 
         }
