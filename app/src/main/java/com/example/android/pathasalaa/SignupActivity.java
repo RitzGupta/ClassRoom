@@ -25,10 +25,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
     ProgressBar progressBar;
     EditText editTextName, editTextEmail, editTextPassword, editTextMobile, editTextRePass;
-    Button buttonCreateAcc;
-    TextView textViewLogin;
 
-    FirebaseAuth mAuth;
+
+    private  FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +142,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                     finish();
                     startActivity(new Intent(SignupActivity.this, ProfileActivity.class));

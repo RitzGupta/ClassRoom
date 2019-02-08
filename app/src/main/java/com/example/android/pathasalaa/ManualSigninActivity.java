@@ -58,6 +58,7 @@ public class ManualSigninActivity extends AppCompatActivity implements View.OnCl
         switch (v.getId()) {
             case R.id.btn_login:
                     userLogin();
+                    break;
 
         }
 

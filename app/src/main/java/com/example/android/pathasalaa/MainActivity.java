@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
         finish();
         Intent intent = new Intent(this, LogninActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
     }
